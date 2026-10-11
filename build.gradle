@@ -6,7 +6,12 @@
 
 buildscript {
     repositories {
-        jcenter()
+        // gradle-experimental 0.7.0-alpha1 was published only to JCenter,
+        // which is no longer available.  This mirror retains the archived
+        // artifacts required by this legacy project.
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle-experimental:0.7.0-alpha1'
@@ -20,7 +25,9 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        mavenCentral()
 
 
     }
