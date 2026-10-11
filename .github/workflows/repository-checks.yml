@@ -32,7 +32,6 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          yes | sdkmanager --licenses >/dev/null
           sdkmanager 'platforms;android-23' 'build-tools;23.0.2'
 
       - name: Install Android NDK r10e
