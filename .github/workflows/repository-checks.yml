@@ -18,6 +18,12 @@ jobs:
       - name: Check out source
         uses: actions/checkout@v5
 
+      - name: Set up Java 17 for Android SDK tools
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+
       - name: Set up Android SDK 23
         uses: android-actions/setup-android@v3
       - name: Install Android build tools
