@@ -7,8 +7,9 @@
 buildscript {
     repositories {
         // gradle-experimental 0.7.0-alpha1 was published only to JCenter,
-        // which is no longer available.  This mirror retains the archived
+        // which is no longer available. These mirrors retain the archived
         // artifacts required by this legacy project.
+        maven { url 'https://repo.huaweicloud.com/repository/maven/' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/google' }
         mavenCentral()
@@ -25,6 +26,7 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url 'https://repo.huaweicloud.com/repository/maven/' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/google' }
         mavenCentral()
