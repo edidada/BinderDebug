@@ -1,0 +1,49 @@
+name: Repository checks
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  repository-integrity:
+    name: Verify project prerequisites
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Verify Android and Binder debug assets
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          required_files=(
+            gradlew
+            gradle/wrapper/gradle-wrapper.jar
+            gradle/wrapper/gradle-wrapper.properties
+            app/build.gradle
+            app/src/main/AndroidManifest.xml
+            app/src/main/jni/ExampleService.cpp
+            app/src/main/jni/binder_ndk.cpp
+            binder_lib/libs/libbinder.so
+            binder_lib/libs/libc.so
+            binder_lib/libs/libcutils.so
+            binder_lib/libs/libutils.so
+            binder_lib/include/binder/IBinder.h
+            binder_lib/include/utils/RefBase.h
+          )
+
+          for file in "${required_files[@]}"; do
+            test -s "$file"
+            echo "Verified $file"
+          done
+
+          test -x gradlew
+          grep -q 'gradle-2.10-all.zip' gradle/wrapper/gradle-wrapper.properties
+          grep -q "compileSdkVersion = 23" app/build.gradle
