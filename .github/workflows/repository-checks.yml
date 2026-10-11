@@ -89,7 +89,7 @@ jobs:
           done
 
           test -x gradlew
-          grep -q 'gradle-2.10-all.zip' gradle/wrapper/gradle-wrapper.properties
+          grep -Eq '^distributionUrl=.*gradle-[0-9][^[:space:]]*[.]zip[[:space:]]*$' gradle/wrapper/gradle-wrapper.properties
           grep -q "compileSdkVersion = 23" app/build.gradle
 
       - name: Build ARM debug APK
